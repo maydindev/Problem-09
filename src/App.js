@@ -2,15 +2,11 @@ import Image from 'next/image'
 import files from './files'
 
 // PhotoListItem bileşeni oluşturup, files array kullanarak görüntülemeye çalışın. Verileri bir prop olarak geçirin ve görüntüleyin
-function PhotoList() {
+
+function PhotoListItem({file}) {
   return (
-    <ul
-      role='list'
-      className='grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8'
-    >
-      {files.map((file) => (
-        <li key={file.source} className='relative'>
-          <div className='group aspect-square block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100'>
+    <>
+    <div className='group aspect-square block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100'>
             <Image
               src={file.source}
               alt=''
@@ -32,7 +28,20 @@ function PhotoList() {
           </p>
           <p className='pointer-events-none block text-sm font-medium text-gray-500'>
             {file.size}
-          </p>
+          </p></>
+
+  )
+}
+
+function PhotoList() {
+  return (
+    <ul
+      role='list'
+      className='grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8'
+    >
+      {files.map((file) => (
+        <li key={file.source} className='relative'>
+          <PhotoListItem file={file}/>
         </li>
       ))}
     </ul>
